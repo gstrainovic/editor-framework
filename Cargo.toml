@@ -13,3 +13,5 @@ resolver = "2"
 mlua = { version = "0.10", features = ["lua54", "vendored"] }
 anyhow = "1"
 log = "0.4"
+gpui = "0.2"
+dirs = "5"
