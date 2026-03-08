@@ -1,0 +1,4 @@
+id = "welcome"
+name = "Welcome Screen"
+version = "0.1.0"
+description = "Shows a welcome message on startup"
