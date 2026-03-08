@@ -1,0 +1,15 @@
+[workspace]
+members = [
+    "crates/ef-core",
+    "crates/ef-lua",
+    "crates/ef-widgets",
+    "crates/ef-workspace",
+    "crates/ef-pm",
+    "crates/ef-app",
+]
+resolver = "2"
+
+[workspace.dependencies]
+mlua = { version = "0.10", features = ["lua54", "vendored"] }
+anyhow = "1"
+log = "0.4"
