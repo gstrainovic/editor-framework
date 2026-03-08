@@ -1,1 +1,2 @@
-// TODO
+mod manager;
+pub use manager::PluginManager;
