@@ -10,8 +10,7 @@ impl Render for WelcomeView {
             .items_center()
             .justify_center()
             .size_full()
-            .text_xl()
-            .child("editor-framework — alles ist ein Plugin")
+            .child("editor-framework")
     }
 }
 
