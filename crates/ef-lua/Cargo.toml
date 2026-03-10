@@ -7,3 +7,4 @@ edition = "2021"
 mlua = { workspace = true }
 anyhow = { workspace = true }
 log = { workspace = true }
+ef-core = { path = "../ef-core" }

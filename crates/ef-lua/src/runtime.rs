@@ -1,13 +1,16 @@
 use mlua::prelude::*;
 use anyhow::Result;
+use std::sync::Arc;
 
 pub struct LuaRuntime {
-    lua: Lua,
+    lua: Arc<mlua::Lua>,
 }
 
 impl LuaRuntime {
     pub fn new() -> Result<Self> {
-        Ok(Self { lua: Lua::new() })
+        Ok(Self {
+            lua: Arc::new(Lua::new()),
+        })
     }
 
     pub fn eval<T: FromLua>(&self, code: &str) -> Result<T> {
@@ -18,7 +21,7 @@ impl LuaRuntime {
         self.lua.load(code).exec().map_err(|e| anyhow::anyhow!("{e}"))
     }
 
-    pub fn lua(&self) -> &Lua {
-        &self.lua
+    pub fn lua(&self) -> Arc<mlua::Lua> {
+        self.lua.clone()
     }
 }

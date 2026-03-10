@@ -12,7 +12,7 @@ ef.plugin({
             id = "welcome",
             position = opts.position or "center",
             render = function(cx)
-                cx:text("Willkommen in editor-framework")
+                cx:text("WAUUU MEGA HOT RELOAD BEWIESEN - KEIN REBUILD!")
                 cx:text("")
                 cx:text("Plugins installieren:")
                 cx:text("  ef install https://github.com/user/ef-neovim")
