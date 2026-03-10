@@ -14,5 +14,7 @@ mlua = { version = "0.10", features = ["lua54", "vendored"] }
 anyhow = "1"
 log = "0.4"
 gpui = "0.2"
+gpui-component = "0.5.1"
+gpui-component-assets = "0.5"
 dirs = "5"
 notify = "6"

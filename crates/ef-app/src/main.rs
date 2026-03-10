@@ -89,6 +89,12 @@ impl Render for WelcomeView {
 }
 
 fn main() -> Result<()> {
+    // Force X11/XWayland on Linux — GPUI 0.2 has no server-side decoration support on Wayland
+    #[cfg(target_os = "linux")]
+    if std::env::var("EF_WAYLAND").is_err() && std::env::var("GPUI_PLATFORM").is_err() {
+        unsafe { std::env::set_var("WAYLAND_DISPLAY", "") };
+    }
+
     let runtime = Box::leak(Box::new(ef_lua::LuaRuntime::new()?));
     let debug_state = DebugState::new();
 
@@ -150,11 +156,15 @@ fn main() -> Result<()> {
     Application::new().run(move |cx: &mut App| {
         cx.open_window(
             WindowOptions {
+                window_bounds: Some(gpui::WindowBounds::Windowed(gpui::Bounds {
+                    origin: gpui::Point::default(),
+                    size: gpui::size(gpui::px(1024.0), gpui::px(768.0)),
+                })),
                 titlebar: Some(gpui::TitlebarOptions {
                     title: Some("editor-framework".into()),
-                    appears_transparent: false,
-                    traffic_light_position: None,
+                    ..Default::default()
                 }),
+                window_decorations: Some(gpui::WindowDecorations::Server),
                 ..Default::default()
             },
             move |_window, cx| {
