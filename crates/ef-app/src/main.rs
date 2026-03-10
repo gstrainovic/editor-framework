@@ -85,24 +85,6 @@ impl Render for WelcomeView {
                             _        => panel_div.top_0().left_0(),
                         }
                     }))
-                    .child(if show_debug {
-                        div()
-                            .absolute()
-                            .bottom_0()
-                            .left_0()
-                            .size_full()
-                            .h_1_3()
-                            .bg(rgb(0x111111))
-                            .p_4()
-                            .child(
-                                div()
-                                    .font_family("monospace")
-                                    .text_color(rgb(0xffffff))
-                                    .child(self.debug_state.lock().unwrap().log.join("\n")),
-                            )
-                    } else {
-                        div().hidden()
-                    }),
             )
     }
 }
