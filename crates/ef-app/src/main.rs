@@ -50,7 +50,6 @@ impl Render for WelcomeView {
         }
 
         let state = self.debug_state.lock().unwrap();
-        let show_debug = state.panel_open;
         let panels = state.panels.clone();
         drop(state);
 
@@ -149,14 +148,24 @@ fn main() -> Result<()> {
     let debug_state_gpui = debug_state.clone();
 
     Application::new().run(move |cx: &mut App| {
-        cx.open_window(WindowOptions::default(), move |_window, cx| {
-            cx.new(|_cx| WelcomeView {
-                debug_state: debug_state_gpui.clone(),
-                runtime,
-                should_reload: should_reload.clone(),
-                polling_started: false,
-            })
-        })
+        cx.open_window(
+            WindowOptions {
+                titlebar: Some(gpui::TitlebarOptions {
+                    title: Some("editor-framework".into()),
+                    appears_transparent: false,
+                    traffic_light_position: None,
+                }),
+                ..Default::default()
+            },
+            move |_window, cx| {
+                cx.new(|_cx| WelcomeView {
+                    debug_state: debug_state_gpui.clone(),
+                    runtime,
+                    should_reload: should_reload.clone(),
+                    polling_started: false,
+                })
+            },
+        )
         .unwrap();
     });
 
